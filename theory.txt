@@ -1,0 +1,31 @@
+we must add button "delete" near each employee
+when we press this button - we must see new window with form to confirm the deletion the employee's data:
+
+
+    Delete Employee:
+        1. new button "delete" for list-employee.html
+
+
+                delete button includes employee id:
+                <tr th:each="tempEmployee" : ${employees}">
+                ...
+                <td>
+                <a th:href:"@{/employees/delete(employeeId=${templEmployee.id})}"
+                        class="btn btn-info btn-sm"
+                        onclick="if(!(confirm('Are u sure u want to delete this employee?'))) return false">
+                    Delete
+                </a>
+                </td>
+
+
+        2. add controller code for "Delete"
+
+                in Controller
+
+                        @GetMapping("/delete")
+                        public String showFormForUpdate(@RequestParam("employeeId") int Id){ //
+                            //save employee
+                            employeeService.deleteById(Id);
+
+                            return "redirect: employees/list"
+                        }
